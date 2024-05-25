@@ -1,0 +1,7 @@
+version: "3"
+services:
+  mongoDbContainer:
+    image: mongo:latest
+    container_name: "mongoDbContainer"
+    ports:
+      - 27017:27017

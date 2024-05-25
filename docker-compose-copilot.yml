@@ -1,0 +1,14 @@
+version: "3"
+services:
+  mongoDbContainer:
+    image: mongo:latest
+    container_name: "mongoDbContainer"
+    ports:
+      - 27017:27017
+  springBootApp:
+    image: copilot-1:0.0.1-SNAPSHOT
+    container_name: "springBootApp"
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongoDbContainer
