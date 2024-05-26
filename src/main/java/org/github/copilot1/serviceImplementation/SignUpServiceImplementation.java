@@ -1,6 +1,6 @@
 package org.github.copilot1.serviceImplementation;
 
-import org.github.copilot1.Request.SignUpRequest;
+import org.github.copilot1.dto.SignUpRequest;
 import org.github.copilot1.models.User;
 import org.github.copilot1.repo.UserRepository;
 import org.github.copilot1.services.SignUpService;

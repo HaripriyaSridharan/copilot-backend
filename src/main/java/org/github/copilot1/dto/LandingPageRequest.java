@@ -1,4 +1,4 @@
-package org.github.copilot1.Request;
+package org.github.copilot1.dto;
 
 import lombok.Getter;
 import lombok.Setter;

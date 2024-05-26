@@ -1,6 +1,6 @@
 package org.github.copilot1.serviceImplementation;
 
-import org.github.copilot1.Request.LandingPageRequest;
+import org.github.copilot1.dto.LandingPageRequest;
 import org.github.copilot1.repo.UserRepository;
 import org.github.copilot1.services.LandingPageService;
 import org.springframework.beans.factory.annotation.Autowired;

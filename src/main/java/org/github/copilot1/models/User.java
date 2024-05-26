@@ -25,12 +25,16 @@ public class User {
     @Field
     private String password;
     @Field
-    private String name;
+    private String firstName;
+    @Field
+    private String lastName;
     @Field
     private Vehicle vehicle;
     @Field
     private String gender;
     @Field
     private String phoneNumber;
+    @Field
+    private String profileImage;
 
 }

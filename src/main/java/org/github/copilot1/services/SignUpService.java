@@ -1,7 +1,7 @@
 package org.github.copilot1.services;
 
 
-import org.github.copilot1.Request.SignUpRequest;
+import org.github.copilot1.dto.SignUpRequest;
 import org.springframework.stereotype.Service;
 
 @Service

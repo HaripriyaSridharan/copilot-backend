@@ -1,6 +1,6 @@
 package org.github.copilot1.controller;
 
-import org.github.copilot1.Request.SignUpRequest;
+import org.github.copilot1.dto.SignUpRequest;
 import org.github.copilot1.services.SignUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +16,7 @@ public class SignUpController {
 
     @PostMapping("/signup")
     public ResponseEntity<String> signUp(@RequestBody SignUpRequest signUpRequest) {
+        System.out.println("Signing up");
         signUpService.savePassword(signUpRequest);
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
