@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class SetProfileRequest {
 
-    private String email;
+    private String id;
     private String profileImage;
     private String firstName;
     private String lastName;

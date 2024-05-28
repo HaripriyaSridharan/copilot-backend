@@ -1,4 +1,4 @@
-package org.github.copilot1.serviceImplementation;
+package org.github.copilot1.serviceimplementation;
 
 import org.github.copilot1.dto.LandingPageRequest;
 import org.github.copilot1.repo.UserRepository;

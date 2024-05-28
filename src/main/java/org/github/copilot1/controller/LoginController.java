@@ -19,7 +19,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User credentials) {
-        if (credentials.getEmail() == null || credentials.getPassword() == null) {
+        if (credentials.getId() == null || credentials.getPassword() == null) {
             return ResponseEntity.badRequest().body("Invalid request");
         }
 

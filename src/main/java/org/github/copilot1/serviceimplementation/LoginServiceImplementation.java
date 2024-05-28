@@ -1,4 +1,4 @@
-package org.github.copilot1.serviceImplementation;
+package org.github.copilot1.serviceimplementation;
 
 import java.util.Optional;
 import org.github.copilot1.models.User;
@@ -15,12 +15,14 @@ public class LoginServiceImplementation implements LoginService {
 
     @Override
     public AuthenticationResult authenticate(User userCredentials) {
-        String email = userCredentials.getEmail();
         String password = userCredentials.getPassword();
-        User user = userRepository.findByEmail(email);
+        Optional<User> optionalUser = userRepository.findById(userCredentials.getId());
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
             if (user.getPassword().equals(password)) {
                 return new AuthenticationResult(true, user);
             }
+        }
         return new AuthenticationResult(false, null);
     }
 }

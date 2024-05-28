@@ -1,4 +1,4 @@
-package org.github.copilot1.serviceImplementation;
+package org.github.copilot1.serviceimplementation;
 
 import org.github.copilot1.dto.SignUpRequest;
 import org.github.copilot1.models.User;
