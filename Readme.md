@@ -103,3 +103,5 @@ Your application should now be up and running, connected to the MongoDB instance
 - Stopping the MongoDB Service: To stop the MongoDB service, you can use `Ctrl+C` in the terminal where docker-compose is running, or run `docker-compose down` in another terminal.
 - Building the Application: If you need to rebuild the application, you can use `./gradlew build`.
 
+For further assistance, please contact `haripriya_sridharan@comcast.com` , `gowtham_rajendran@comcast.com` , `mouli_vijay@comcast.com` , `deeranchinnamalai_asokan@comcast.com` , `keerthana_d@comcast.com`.
+
