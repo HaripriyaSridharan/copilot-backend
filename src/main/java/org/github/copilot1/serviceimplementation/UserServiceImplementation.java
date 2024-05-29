@@ -72,8 +72,11 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public void addVehicle(Vehicle vehicle) {
+
         userRepository.findById(vehicle.getUserId()).ifPresent(user -> {
             List<Vehicle> vehicles = Optional.ofNullable(user.getVehicles()).orElse(new ArrayList<>());
+            int id = vehicles.size()+1;
+            vehicle.setVehicleId(String.valueOf(id));
             vehicles.add(vehicle);
             user.setVehicles(vehicles);
             userRepository.save(user);

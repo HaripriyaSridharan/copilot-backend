@@ -1,6 +1,7 @@
 package org.github.copilot1.controller;
 
 import java.util.List;
+import org.github.copilot1.Response.GetRidesResponse;
 import org.github.copilot1.models.Passenger;
 import org.github.copilot1.models.Rider;
 import org.github.copilot1.services.NodalPointService;
@@ -29,9 +30,10 @@ public class TakeRideController {
     }
 
     @PostMapping("/takeRide")
-    public ResponseEntity<List<Rider>> takeRide(@RequestBody Passenger passenger) {
-        System.out.println("Taking ride");
-        return new ResponseEntity<>(takeRideService.getRides(passenger), HttpStatus.OK);
+    public ResponseEntity< List<GetRidesResponse>> takeRide(@RequestBody Passenger passenger) {
+        System.out.println("Taking ride"+ passenger.getId());
+
+            return new ResponseEntity<>(takeRideService.getRides(passenger), HttpStatus.OK);
     }
 
     @PostMapping("/loadNodes")

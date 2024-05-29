@@ -17,6 +17,7 @@ public class PublishRideController {
     PublishRideService publishRideService;
     @PostMapping("/publishRide")
     public ResponseEntity<String> publishRide(@RequestBody Rider rider) {
+        System.out.println(rider.toString());
         publishRideService.createRide(rider);
         return new ResponseEntity<>("Ride published successfully", HttpStatus.CREATED);
     }
