@@ -1,6 +1,9 @@
 package org.github.copilot1.serviceimplementation;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.github.copilot1.models.User;
+import org.github.copilot1.models.Vehicle;
 import org.github.copilot1.repo.UserRepository;
 import org.github.copilot1.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +63,20 @@ public class UserServiceImplementation implements UserService {
     public User getUser(String id) {
         Optional<User> optionalUser = userRepository.findById(id);
         return optionalUser.orElse(null);
+    }
+
+    @Override
+    public List<Vehicle> getVehicleById(String id) {
+        return Optional.ofNullable(userRepository.findById(id).orElse(null)).map(User::getVehicles).orElse(null);
+    }
+
+    @Override
+    public void addVehicle(Vehicle vehicle) {
+        userRepository.findById(vehicle.getUserId()).ifPresent(user -> {
+            List<Vehicle> vehicles = Optional.ofNullable(user.getVehicles()).orElse(new ArrayList<>());
+            vehicles.add(vehicle);
+            user.setVehicles(vehicles);
+            userRepository.save(user);
+        });
     }
 }

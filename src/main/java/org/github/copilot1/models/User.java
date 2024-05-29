@@ -3,6 +3,7 @@ package org.github.copilot1.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import java.util.List;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,7 +37,7 @@ public class User {
     private String lastName;
 
     @Field
-    private Vehicle vehicle;
+    private List<Vehicle> vehicles;
 
     @Field
     private String gender;

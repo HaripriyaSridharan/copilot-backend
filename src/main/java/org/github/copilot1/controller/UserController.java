@@ -1,6 +1,8 @@
 package org.github.copilot1.controller;
 
+import java.util.List;
 import org.github.copilot1.models.User;
+import org.github.copilot1.models.Vehicle;
 import org.github.copilot1.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,5 +55,15 @@ public class UserController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+    @GetMapping("/{id}/vehicle")
+    public ResponseEntity<List<Vehicle>> getVehicleById(@PathVariable String id) {
+        List vehicle = userService.getVehicleById(id);
+            return new ResponseEntity<List<Vehicle>>(vehicle, HttpStatus.OK);
+    }
+    @PostMapping("/addVehicle")
+    public ResponseEntity<String> addVehicle(@RequestBody Vehicle vehicle) {
+        userService.addVehicle(vehicle);
+        return new ResponseEntity<>("Vehicle Added", HttpStatus.CREATED);
     }
 }
