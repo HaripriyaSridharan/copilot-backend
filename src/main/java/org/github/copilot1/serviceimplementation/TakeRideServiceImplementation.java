@@ -1,7 +1,9 @@
 package org.github.copilot1.serviceimplementation;
 
 import java.util.ArrayList;
+import org.apache.commons.lang3.StringUtils;
 import org.github.copilot1.Response.GetRidesResponse;
+import org.github.copilot1.models.NodalPoint;
 import org.github.copilot1.models.Passenger;
 import org.github.copilot1.models.Rider;
 import org.github.copilot1.models.User;
@@ -48,14 +50,16 @@ public class TakeRideServiceImplementation implements TakeRideService {
         return responses;
     }
 
-    private String getFare(Passenger passenger){
-        String from = passenger.getFrom();
-        String to = passenger.getTo();
-          String node = ("office".equalsIgnoreCase(from))? to : from;
-        Double distance= nodalPointRepository.findByNode(node).getDistance();
-        Double fare = distance * 10;
-        return fare.toString();
+    private String getFare(Passenger passenger) {
+
+         NodalPoint fromNode = nodalPointRepository.findByNode(passenger.getFrom());
+         NodalPoint toNode = nodalPointRepository.findByNode(passenger.getTo());
+         double distance= fromNode.getDistance()>toNode.getDistance()?fromNode.getDistance()-toNode.getDistance():toNode.getDistance()-fromNode.getDistance();
+
+        double fare = distance * 50;
+        return Double.toString(fare);
     }
+
 
     private String formatTime(Rider ride){
         LocalDateTime dateTime = ride.getDateTime();
