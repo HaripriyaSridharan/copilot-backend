@@ -1,5 +1,6 @@
 package org.github.copilot1.serviceimplementation;
 
+import java.util.List;
 import org.github.copilot1.Response.PassengerInfo;
 import org.github.copilot1.Response.RiderInfo;
 import org.github.copilot1.models.Ride;
@@ -7,7 +8,6 @@ import org.github.copilot1.models.User;
 import org.github.copilot1.repo.RideRepository;
 import org.github.copilot1.repo.UserRepository;
 import org.github.copilot1.services.RideService;
-import org.github.copilot1.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +44,15 @@ public class RideServiceImplementation implements RideService {
         rideRepository.deleteById(id);
     }
 
+    @Override
+    public List<Ride> getBookedRides(String id) {
+        return rideRepository.findByPassengerId(id);
+    }
+    @Override
+    public List<Ride> getPublishedRides(String id) {
+        return rideRepository.findByRiderIdInRideDetails(id);
+    }
+
     public RiderInfo getRiderInfo(String riderId) {
         RiderInfo riderInfo =new RiderInfo();
         riderInfo.setRiderId(riderId);
@@ -59,5 +68,8 @@ public class RideServiceImplementation implements RideService {
     public Ride getLatestRide() {
         return rideRepository.findFirstByOrderByCreatedTimeDesc();
     }
-
+    @Override
+    public Ride getRide(String id) {
+        return rideRepository.findById(id).get();
+    }
 }

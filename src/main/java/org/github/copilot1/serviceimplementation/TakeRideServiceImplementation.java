@@ -25,64 +25,14 @@ public class TakeRideServiceImplementation implements TakeRideService {
     @Autowired
     private RiderRepository riderRepository;
     @Autowired
-    private NodalPointRepository nodalPointRepository;
-    @Autowired
-    private UserRepository userRepository;
+    private serviceUtils serviceUtils;
+
 
     @Override
     public  List<GetRidesResponse> getRides(Passenger passenger) {
-        List<Rider> rides=  riderRepository.findByFromAndToAndTimeAfter(passenger.getFrom(), passenger.getTo(), passenger.getDateTime());
-        List<GetRidesResponse> responses = new ArrayList<>();
-        System.out.println("Rides found: "+rides.size());
-        for (Rider ride : rides) {
-            GetRidesResponse response = new GetRidesResponse();
-            User user = userRepository.findById(ride.getUserId()).get();
-            response.setRideId(ride.getId());
-            response.setRiderId(ride.getUserId());
-            response.setName(generateName(user));
-            response.setType(getType(ride,user));
-            response.setGender(user.getGender());
-            response.setFare(getFare(passenger));
-            response.setTime(formatTime(ride));
-            response.setDate(formatDate(ride));
-            responses.add(response);
-        }
-        return responses;
-    }
-
-    private String getFare(Passenger passenger) {
-
-         NodalPoint fromNode = nodalPointRepository.findByNode(passenger.getFrom());
-         NodalPoint toNode = nodalPointRepository.findByNode(passenger.getTo());
-         double distance= fromNode.getDistance()>toNode.getDistance()?fromNode.getDistance()-toNode.getDistance():toNode.getDistance()-fromNode.getDistance();
-
-        double fare = distance * 50;
-        return Double.toString(fare);
-    }
-
-
-    private String formatTime(Rider ride){
-        LocalDateTime dateTime = ride.getDateTime();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
-       return dateTime.format(formatter);
-    }
-    private String formatDate(Rider ride){
-        LocalDateTime dateTime = ride.getDateTime();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd yyyy");
-        return dateTime.format(formatter);
-    }
-
-    private String generateName(User user){
-        return user.getFirstName() + " " + user.getLastName();
-    }
-    private String getType(Rider ride,User user){
-        List<Vehicle> vehicles = user.getVehicles();
-        for (Vehicle vehicle : vehicles) {
-            if (vehicle.getVehicleId().equals(ride.getVehicleId())) {
-                return vehicle.getVehicleType();
-            }
-        }
-        return null;
+        LocalDateTime timePlus24Hours = passenger.getDateTime().plusHours(24);
+        List<Rider> rides = riderRepository.findByFromAndToAndTimeAfterAndWithin24Hours(passenger.getFrom(), passenger.getTo(), passenger.getDateTime(), timePlus24Hours);
+        return serviceUtils.formatRiderResponse(rides, passenger);
     }
 
 }

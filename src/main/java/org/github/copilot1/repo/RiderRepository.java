@@ -11,6 +11,8 @@ import java.util.List;
 
 @Repository
 public interface RiderRepository extends MongoRepository<Rider, String> {
-    @Query("{'from': ?0, 'to': ?1, 'dateTime': {$gt: ?2}}")
-    List<Rider> findByFromAndToAndTimeAfter(String from, String to, LocalDateTime time);
+    @Query("{'from': ?0, 'to': ?1, 'dateTime': {$gt: ?2, $lt: ?3}}")
+    List<Rider> findByFromAndToAndTimeAfterAndWithin24Hours(String from, String to, LocalDateTime time, LocalDateTime timePlus24Hours);
+
+    List<Rider> findByUserId(String id);
 }

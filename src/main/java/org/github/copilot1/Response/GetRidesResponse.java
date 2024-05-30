@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class GetRidesResponse {
 
-    private String rideId;
+    private String publishedRideId;
     private String riderId;
     private String type;
     private String name;
@@ -15,4 +15,6 @@ public class GetRidesResponse {
     private String date;
     private String gender;
     private String fare;
+    private String from;
+    private String to;
 }

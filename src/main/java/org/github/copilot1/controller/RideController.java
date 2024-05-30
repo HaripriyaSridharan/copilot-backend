@@ -1,5 +1,6 @@
 package org.github.copilot1.controller;
 
+import java.util.List;
 import org.github.copilot1.Response.PassengerInfo;
 import org.github.copilot1.Response.RiderInfo;
 import org.github.copilot1.models.Ride;
@@ -42,5 +43,13 @@ public class RideController {
     public ResponseEntity<String> deleteRide(@PathVariable String id) {
         rideService.deleteRide(id);
         return new ResponseEntity<>("Ride deleted", HttpStatus.ACCEPTED);
+    }
+    @GetMapping("/{id}/bookedRides")
+    public ResponseEntity<List<Ride>> getBookedRides(@PathVariable String id){
+          return new ResponseEntity<>(rideService.getBookedRides(id), HttpStatus.OK);
+    }
+    @GetMapping("/{id}/getRide")
+    public ResponseEntity<Ride> getRide(@PathVariable String id){
+        return new ResponseEntity<>(rideService.getRide(id), HttpStatus.OK);
     }
 }

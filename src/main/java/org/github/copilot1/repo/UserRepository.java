@@ -14,4 +14,5 @@ public interface UserRepository extends MongoRepository<User, String> {
     boolean existsByEmail(String email);
     @Query(sort = "{ '_id': -1 }")
     User findFirstByOrderByIdDesc();
+
 }

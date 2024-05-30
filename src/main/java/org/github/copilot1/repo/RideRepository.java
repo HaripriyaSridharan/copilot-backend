@@ -13,4 +13,12 @@ import java.util.List;
 @Repository
 public interface RideRepository extends MongoRepository<Ride, String> {
     Ride findFirstByOrderByCreatedTimeDesc();
+    List<Ride> findByPassengerId(String passengerId);
+
+
+    @Query("{'rideDetails.riderId': ?0}")
+    List<Ride> findByRiderIdInRideDetails(String riderId);
+
+    @Query("{'rideDetails.riderId': ?0}")
+    Ride findByRideIdInRideDetails(String rideId);
 }
